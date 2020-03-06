@@ -10,7 +10,10 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 public class SecondActivity extends AppCompatActivity {
+    ArrayList<String> event_list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
