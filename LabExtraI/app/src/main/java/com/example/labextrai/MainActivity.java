@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -15,14 +16,22 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
+    ArrayList<String> event_list = new ArrayList<>();
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        textView = (TextView) findViewById(R.id.event_list);
+//        setSupportActionBar(toolbar);
+        event_list.add("Se crea la primera actividad.");
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -35,62 +44,43 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
-    /*
-        @Override
-        public boolean onCreateOptionsMenu(Menu menu) {
-            // Inflate the menu; this adds items to the action bar if it is present.
-            getMenuInflater().inflate(R.menu.menu_main, menu);
-            return true;
-        }
 
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            // Handle action bar item clicks here. The action bar will
-            // automatically handle clicks on the Home/Up button, so long
-            // as you specify a parent activity in AndroidManifest.xml.
-            int id = item.getItemId();
-
-            //noinspection SimplifiableIfStatement
-            if (id == R.id.action_settings) {
-                return true;
-            }
-
-            return super.onOptionsItemSelected(item);
-        }
-
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            // The activity is being created.
-        }*/
     @Override
     protected void onStart() {
         super.onStart();
-        Toast.makeText(getApplicationContext(), "Estoy en onStart de MA", Toast.LENGTH_SHORT).show();
+        event_list.add("Se crea la primera actividad.");
+        Toast.makeText(getApplicationContext(), "Estoy en onStart de MA2", Toast.LENGTH_SHORT).show();
         // The activity is about to become visible.
     }
     @Override
     protected void onResume() {
         super.onResume();
-        Toast.makeText(getApplicationContext(), "Estoy en onResume de MA", Toast.LENGTH_SHORT).show();
+        event_list.add("Se resume la primera actividad.");
+        textView.setText(
+                event_list.stream().collect(Collectors.joining("\n"))
+        );
+        Toast.makeText(getApplicationContext(), "Estoy en onResume de MA2", Toast.LENGTH_SHORT).show();
         // The activity has become visible (it is now "resumed").
     }
     @Override
     protected void onPause() {
         super.onPause();
-        Toast.makeText(getApplicationContext(), "Estoy en onPause de MA", Toast.LENGTH_SHORT).show();
+        event_list.add("Se pausa la primera actividad.");
+        Toast.makeText(getApplicationContext(), "Estoy en onPause de MA2", Toast.LENGTH_SHORT).show();
         // Another activity is taking focus (this activity is about to be "paused").
     }
     @Override
     protected void onStop() {
         super.onStop();
-        Toast.makeText(getApplicationContext(), "Estoy en onStop de MA", Toast.LENGTH_SHORT).show();
+        event_list.add("Se detiene la primera actividad.");
+        Toast.makeText(getApplicationContext(), "Estoy en onStop de MA2", Toast.LENGTH_SHORT).show();
         // The activity is no longer visible (it is now "stopped")
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Toast.makeText(getApplicationContext(), "Estoy en onDestroy de MA", Toast.LENGTH_SHORT).show();
+        event_list.add("Se destruye la primera actividad.");
+        Toast.makeText(getApplicationContext(), "Estoy en onDestroy de MA2", Toast.LENGTH_SHORT).show();
         // The activity is about to be destroyed.
     }
 
